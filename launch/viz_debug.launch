@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- PID Plot -->
+    <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot"
+    args="/base_controller/speed_setpoint /control_effort/data /wheel_odometry/vehicle_speed /base_actuator/control_effort_speed" />
+
+    <!-- rqt reconfiguration tool  -->
+    <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
+    
+    <!-- logging -->
+    <node name="rqt_robot_monitor" pkg="rqt_robot_monitor" type="rqt_robot_monitor" />
+    
+</launch>

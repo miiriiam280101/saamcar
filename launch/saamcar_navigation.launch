@@ -1,0 +1,37 @@
+<launch>
+   <include file="$(find saamcar)/launch/bringup/bringup_saamcar_core.launch" />
+   <include file="$(find saamcar)/launch/bringup/bringup_cartographer_map_server.launch">
+      <param name="configuration_basename" value="cartographer_config_low_latency" />
+   </include>
+
+   <master auto="start"/>
+ <!-- Run the map server --> 
+    <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find saamcar)/maps/map_edited.pgm 0.050000"/> -->
+
+ <!--- Run AMCL --> 
+    <!-- <include file="$(find amcl)/examples/amcl_omni.launch" /> -->
+
+   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find saamcar)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+    <rosparam file="$(find saamcar)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find saamcar)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find saamcar)/config/global_costmap_params.yaml" command="load" /> 
+    <rosparam file="$(find saamcar)/config/base_local_planner_params.yaml" command="load" />
+   
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    <param name="controller_frequency" value="10.0" />
+    <!-- <param name="TebLocalPlannerROS/wheelbase" value="0.35"> -->
+    <remap from="cmd_vel" to="/base_controller/cmd_vel"/>  
+   </node>
+
+</launch> 
+
+<!--
+   SAAMcar navigation bootup sequence:
+   
+   1  launch bringup_saamcar_core.launch
+      1.1-> launches SENSORS
+      1.2-> launches STATIC TRANSFORMS
+   2  launch bringup_cartographer_map_server.launch
+      publishes map for the nav stack 
+-->

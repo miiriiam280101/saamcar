@@ -1,0 +1,6 @@
+<launch>
+    <node type="rviz" name="rviz" pkg="rviz" 
+        args="-d $(find saamcar)/config/rviz/rviz_navigation.rviz" />
+    <node type="rqt_gui" pkg="rqt_gui" name="rqt_gui"
+        args="--perspective-file $(find saamcar)/config/rqt/saamcar_main.perspective"/>
+</launch>

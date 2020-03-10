@@ -1,0 +1,22 @@
+<!-- 
+add -load_state_filename $MAP_FILE.pbstream to cartographer_node args
+to load saved trajectories 
+-->
+<launch>
+    <arg name="configuration_basename" default="cartographer_config.lua" />
+
+    <node name="cartographer_node" pkg="cartographer_ros"
+        type="cartographer_node" args="
+            -configuration_directory
+                $(find saamcar)/config/cartographer
+            -configuration_basename $(arg configuration_basename)"
+        output="screen">
+        <remap from="scan" to="/scan" />
+        <remap from="imu" to="base_sensor/imu" />
+        <remap from="odom" to="/wheel_odometry/odom" />
+    </node>
+
+    <node name="occupacy_grid_node" pkg="cartographer_ros"
+        type="cartographer_occupancy_grid_node">
+    </node>
+</launch>

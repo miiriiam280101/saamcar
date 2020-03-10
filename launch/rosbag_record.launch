@@ -1,0 +1,7 @@
+<launch>
+ <include file="$(find saamcar)/launch/bringup_saamcar_core.launch"> </include>
+
+ <node pkg="rosbag" type="record" name="rosbag"
+       args="record -o /data/record /base_sensor/imu /base_sensor/wheel_data /diagnostics /front_camera_node/camera_info /front_camera_node/image_raw /rear_camera/camera_info /rear_camera/image_raw /scan /rosout /rosout_agg /tf"
+    />
+</launch>

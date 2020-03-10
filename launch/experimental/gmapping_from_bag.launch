@@ -1,0 +1,64 @@
+<launch>
+  <!-- <arg name="bag_file" default="/data/record03_2019-07-18-14-01-21.bag" /> -->
+
+  <node pkg="saamcar" type="wheel_odometry_publisher.py" name="wheel_odometry_publisher"/>
+  <include file="$(find saamcar)/launch/bringup_transform_publisher.launch"/>
+  <node pkg="rosbag" type="play" name="rosbag"
+       args="--start=23 --clock /data/record_2019-07-23-14-02-58.bag --topics /base_sensor/wheel_data /scan"
+    />
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <!-- <param name="map_update_interval" value="0.5" /> -->
+    <!-- <param name="maxUrange" value="12" /> -->
+    <!-- <param name="iterations" value="10" />
+    <param name="particles" value="15" />
+
+    <param name="srr" value="0.1" />
+    <param name="srt" value="0.2" />
+    <param name="str" value="0.1" />
+    <param name="stt" value="0.4" />
+
+    <param name="resampleThreshold" value="0.1" />
+
+    <param name="temporalUpdate" value="0.05" />
+    <param name="linearUpdate" value="0.3" />
+    <param name="angularUpdate" value="0.1" /> -->
+
+    <param name="map_update_interval" value="0.2"/>
+    <param name="maxUrange" value="12.0"/>
+    <param name="sigma" value="0.05"/>
+    <param name="kernelSize" value="1"/>
+    <param name="lstep" value="0.05"/>
+    <param name="astep" value="0.05"/>
+    <param name="iterations" value="5"/>
+    <param name="lsigma" value="0.075"/>
+    <param name="ogain" value="3.0"/>
+    <param name="lskip" value="0"/>
+    <param name="srr" value="0.1"/>
+    <param name="srt" value="0.2"/>
+    <param name="str" value="0.1"/>
+    <param name="stt" value="0.2"/>
+
+    <param name="linearUpdate" value="0.1"/>
+    <param name="angularUpdate" value="0.1"/>
+
+    <param name="temporalUpdate" value="0.01"/>
+
+    <param name="resampleThreshold" value="0.5"/>
+    <param name="particles" value="100"/>
+
+    <param name="xmin" value="-50.0"/>
+    <param name="ymin" value="-50.0"/>
+    <param name="xmax" value="50.0"/>
+    <param name="ymax" value="50.0"/>
+
+    <param name="delta" value="0.05"/>
+
+    <param name="llsamplerange" value="0.01"/>
+    <param name="llsamplestep" value="0.01"/>
+    <param name="lasamplerange" value="0.05"/>
+    <param name="lasamplestep" value="0.05"/>
+
+
+  </node>
+</launch>

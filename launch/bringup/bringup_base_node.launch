@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- start base sensor node -->
+  <node name="base_sensor" pkg="saamcar" type="base_sensor"> </node>
+
+  <!-- start base actuator node-->
+  <node name="base_actuator" pkg="saamcar" type="base_actuator"> </node>
+
+  <!-- start odometry publisher node-->
+  <node name="odometry_pub" pkg="saamcar" type="wheel_odometry_publisher.py" />
+
+  <!-- start base_controller node-->
+  <node name="base_controller" pkg="saamcar" type="base_controller.py" />
+
+</launch>

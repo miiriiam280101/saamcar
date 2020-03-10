@@ -1,0 +1,74 @@
+<launch>
+   <arg name="node_name" default="rear_camera" />
+
+  <node name="$(arg node_name)" pkg="usb_cam" type="usb_cam_node" output="screen">
+    <param name="video_device" value="/dev/video0" />
+    <param name="image_width" value="1600" />
+    <param name="image_height" value="1200" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_frame_id" value="rear_camera" />
+    <param name="io_method" value="mmap"/>
+  </node>
+
+    <!-- image_proc removes camera distortion from the raw image stream -->
+  <node name="image_proc" pkg="image_proc" type="image_proc" ns="$(arg node_name)">
+  </node>
+</launch>
+
+
+
+<!-- mjpeg = compressed; YUYU = uncompressed -->
+
+  <!-- Index       : 0
+  Type        : Video Capture
+  Pixel Format: 'MJPG' (compressed)
+  Name        : Motion-JPEG
+    Size: Discrete 640x480
+      Interval: Discrete 0.033s (30.000 fps)
+      Interval: Discrete 0.033s (30.000 fps)
+    Size: Discrete 320x240
+      Interval: Discrete 0.033s (30.000 fps)
+    Size: Discrete 1024x768
+      Interval: Discrete 0.033s (30.000 fps)
+    Size: Discrete 1280x720
+      Interval: Discrete 0.033s (30.000 fps)
+    Size: Discrete 1280x960
+      Interval: Discrete 0.033s (30.000 fps)
+    Size: Discrete 1600x1200
+      Interval: Discrete 0.067s (15.000 fps)
+    Size: Discrete 1920x1080
+      Interval: Discrete 0.067s (15.000 fps)
+    Size: Discrete 2048x1536
+      Interval: Discrete 0.067s (15.000 fps)
+    Size: Discrete 2592x1944
+      Interval: Discrete 0.067s (15.000 fps)
+    Size: Discrete 640x480
+      Interval: Discrete 0.033s (30.000 fps)
+      Interval: Discrete 0.033s (30.000 fps)
+
+  Index       : 1
+  Type        : Video Capture
+  Pixel Format: 'YUYV'
+  Name        : YUYV 4:2:2
+    Size: Discrete 640x480
+      Interval: Discrete 0.033s (30.000 fps)
+      Interval: Discrete 0.033s (30.000 fps)
+    Size: Discrete 320x240
+      Interval: Discrete 0.033s (30.000 fps)
+    Size: Discrete 1024x768
+      Interval: Discrete 0.133s (7.500 fps)
+    Size: Discrete 1280x720
+      Interval: Discrete 0.133s (7.500 fps)
+    Size: Discrete 1280x960
+      Interval: Discrete 0.133s (7.500 fps)
+    Size: Discrete 1600x1200
+      Interval: Discrete 0.333s (3.000 fps)
+    Size: Discrete 1920x1080
+      Interval: Discrete 0.333s (3.000 fps)
+    Size: Discrete 2048x1536
+      Interval: Discrete 0.333s (3.000 fps)
+    Size: Discrete 2592x1944
+      Interval: Discrete 0.333s (3.000 fps)
+    Size: Discrete 640x480
+      Interval: Discrete 0.033s (30.000 fps)
+      Interval: Discrete 0.033s (30.000 fps) -->

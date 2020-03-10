@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find saamcar)/launch/bringup/bringup_transform_publisher.launch"/>
+    <include file="$(find saamcar)/launch/bringup/bringup_front_camera_node.launch"/>
+    <include file="$(find saamcar)/launch/bringup/bringup_rear_camera_node.launch"/>
+    <include file="$(find saamcar)/launch/bringup/bringup_lidar_node.launch"/>
+    <include file="$(find saamcar)/launch/bringup/bringup_base_node.launch"/>
+</launch>

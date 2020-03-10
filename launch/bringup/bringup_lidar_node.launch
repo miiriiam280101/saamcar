@@ -1,0 +1,5 @@
+<launch>
+  <node name="lidar" pkg="rplidar_ros" type="rplidarNode"> </node>
+	<param name="scan_mode"           type="string" value="Stability"/>
+</launch>
+
